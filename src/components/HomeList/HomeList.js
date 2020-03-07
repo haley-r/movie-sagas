@@ -7,8 +7,10 @@ class HomeList extends Component {
         this.props.dispatch({ type: "GET_MOVIES" });
     }
 
-    goToDetails=()=>{
-        console.log('clicked on movie poster');
+    goToDetails=(id)=>{
+        console.log('clicked on movie poster', this.props);
+        //go to details view
+        this.props.history.push(`/details/${id}`);
     }
 
     render() {
@@ -19,7 +21,10 @@ class HomeList extends Component {
                     {this.props.reduxMovieState.map((movie)=>
                         <article className="MoviePreview" key={movie.id}>
                             <h2>{movie.title}</h2>
-                            <button onClick={this.goToDetails} title={`see details about ${movie.title}`}>
+                            <button 
+                                onClick={()=>
+                                    this.goToDetails(movie.id)}
+                                title={`see details about ${movie.title}`}>
                                 <img src={movie.poster} alt={`movie poster for ${movie.title}`}/>
                             </button>
                         </article>

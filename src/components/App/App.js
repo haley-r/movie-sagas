@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import './App.css';
+import {HashRouter as Router, Route} from 'react-router-dom';
 //components
 import Header from '../Header/Header';
 import HomeList from '../HomeList/HomeList';
+import Details from '../Details/Details';
 // import Footer from '../Footer/Footer';
 
 class App extends Component {
@@ -11,8 +13,11 @@ class App extends Component {
     return (
       <div className="App">
         <Header />
-        <HomeList />
-        {/* <Footer /> */}
+        <Router>
+          <Route exact path="/" component={HomeList} />
+          <Route path="/details/:movieId" component={Details}/>
+          {/* <Footer /> */}
+        </Router>
       </div>
     );
   }
