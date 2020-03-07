@@ -9,11 +9,27 @@ import { Provider } from 'react-redux';
 import logger from 'redux-logger';
 // Import saga middleware
 import createSagaMiddleware from 'redux-saga';
-
+//import ability to use takeEvery and put with saga
+import { takeEvery, put } from "redux-saga/effects";
+//import axios so we can make requests from generator functions
+import axios from 'axios';
 // Create the rootSaga generator function
 function* rootSaga() {
-
+    yield takeEvery("GET_MOVIES", getMovies);
 }
+
+function* getMovies() {
+//purpose of this function is to get an array of movie objects to send to a reducer
+//so- name what what will be gotten/sent
+//call it allMovies, might change later if search functionality implemented
+    const allMovies = yield axios.get('path to get req here');
+//after (not before!) the movies are gotten, dispatch em to the reducer!
+//because axios returns lots of stuff, need to use .data.data to actually get to the array
+    console.log(`back in getMovies with result`, allMovies);
+
+    yield put({type: "SET_MOVIES", payload: allMovies})
+}
+
 
 // Create sagaMiddleware
 const sagaMiddleware = createSagaMiddleware();
