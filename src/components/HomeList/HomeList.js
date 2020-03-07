@@ -9,9 +9,19 @@ class HomeList extends Component {
 
     render() {
         return (
-            <p>loop through array of GET results to display movies in the database.</p>
+            <section className="HomeList">
+                {this.props.reduxMovieState.map((movie)=>
+                    <article>
+                        <h2>{movie.title}</h2>
+                        <img src={movie.poster} alt={`movie poster for ${movie.title}`}/>
+                    </article>
+                )}
+            </section>
         );
     }
 }
 
-export default connect()(HomeList);
+const putReduxStateOnProps = (reduxState) => ({
+    reduxMovieState: reduxState.movies
+})
+export default connect(putReduxStateOnProps)(HomeList);
