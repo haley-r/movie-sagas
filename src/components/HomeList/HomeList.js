@@ -10,12 +10,14 @@ class HomeList extends Component {
     render() {
         return (
             <section className="HomeList">
-                {this.props.reduxMovieState.map((movie)=>
-                    <article>
-                        <h2>{movie.title}</h2>
-                        <img src={movie.poster} alt={`movie poster for ${movie.title}`}/>
-                    </article>
-                )}
+                <div className="grid-container">
+                    {this.props.reduxMovieState.map((movie)=>
+                        <article className="MoviePreview">
+                            <h2>{movie.title}</h2>
+                            <img src={movie.poster} alt={`movie poster for ${movie.title}`}/>
+                        </article>
+                    )}
+                </div>
             </section>
         );
     }
