@@ -13,28 +13,25 @@ import createSagaMiddleware from 'redux-saga';
 import { takeEvery, put } from "redux-saga/effects";
 //import axios so we can make requests from generator functions
 import axios from 'axios';
+
 // Create the rootSaga generator function
 function* rootSaga() {
     yield takeEvery("GET_MOVIES", getMovies);
 }
 
 function* getMovies() {
-//purpose of this function is to get an array of movie objects to send to a reducer
-//so- name what what will be gotten/sent
-//call it allMovies, might change later if search functionality implemented
-    const allMovies = yield axios.get('path to get req here');
-//after (not before!) the movies are gotten, dispatch em to the reducer!
-//because axios returns lots of stuff, need to use .data.data to actually get to the array
-    console.log(`back in getMovies with result`, allMovies);
-
-    yield put({type: "SET_MOVIES", payload: allMovies})
+//allMovies is result from db get request, and will be sent to reducer
+    const allMovies = yield axios.get('/movies');
+//after (not before!) the movies are gotten, dispatch 'em to the reducer!
+//.data accesses just the array, which is all we want
+    yield put({type: "SET_MOVIES", payload: allMovies.data})
 }
 
 
 // Create sagaMiddleware
 const sagaMiddleware = createSagaMiddleware();
 
-// Used to store movies returned from the server
+// Used to store movies returned from the server as array of objects
 const movies = (state = [], action) => {
     switch (action.type) {
         case 'SET_MOVIES':

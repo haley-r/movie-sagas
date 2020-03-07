@@ -7,8 +7,6 @@ class HomeList extends Component {
         this.props.dispatch({ type: "GET_MOVIES" });
     }
 
-
-
     render() {
         return (
             <p>loop through array of GET results to display movies in the database.</p>
