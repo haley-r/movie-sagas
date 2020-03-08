@@ -18,4 +18,17 @@ router.get('/', (req, res) => {
         })
 })
 
+router.get('/:id', (req, res) => {
+    //using the id given, get just one movie object from database.
+    const query = `SELECT * FROM movies WHERE id=$1`;
+    pool.query(query, [req.params.id])
+        .then(response => {
+            //send the array of movie objects in db (response.rows) back to index.js
+            res.send(response.rows[0]);
+        })
+        .catch(error => {
+            console.log('problem with movies.router get:', error);
+        })
+})
+
 module.exports = router;

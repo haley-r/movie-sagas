@@ -1,29 +1,17 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-class HomeList extends Component {
+class Details extends Component {
 
-    //i don't know if a local state is needed but I think it might save some typing if i can name the movie id here and call it elsewhere
-    state = {
-        movieId: null
-    }
+    getMovie = (movieId) => {
+        console.log('the movieId provided is', movieId);
+        this.props.dispatch({ type: "GET_MOVIE", payload: movieId });
+}
 
     componentDidMount() {
-        //get the movie id from the passed props/params, store it in local state
-        this.setState({
-            movieId: this.props.match.params.movieId
-        })
-
-
-
-        // const { match: { params } } = this.props;
-
-        // axios.get(`/api/users/${params.userId}`)
-        //     .then(({ data: user }) => {
-        //         console.log('user', user);
-
-        //         this.setState({ user });
-        //     });
+        //get the movie id from the passed props/params, GET movie data,
+        //store movie object in localstate
+        this.getMovie(this.props.match.params.movieId);
     }
 
 
@@ -31,11 +19,14 @@ class HomeList extends Component {
         return (
             <div>
                 <section className="details">
-
+                    <p>{JSON.stringify(this.props.selectedMovie)}</p>
                 </section>
             </div>
         );
     }
 }
 
-export default connect()(HomeList);
+const putReduxStateOnProps = (reduxState) => ({
+    selectedMovie: reduxState.movie
+})
+export default connect(putReduxStateOnProps)(Details);

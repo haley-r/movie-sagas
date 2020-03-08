@@ -17,6 +17,7 @@ import axios from 'axios';
 // Create the rootSaga generator function
 function* rootSaga() {
     yield takeEvery("GET_MOVIES", getMovies);
+    yield takeEvery("GET_MOVIE", getMovie);
 }
 
 function* getMovies() {
@@ -27,6 +28,13 @@ function* getMovies() {
     yield put({type: "SET_MOVIES", payload: allMovies.data})
 }
 
+function* getMovie(action) {
+    //allMovies is result from db get request, and will be sent to reducer
+    const selectedMovie = yield axios.get(`/movies/${action.payload}`);
+    //after (not before!) the movies are gotten, dispatch 'em to the reducer!
+    //.data accesses just the array, which is all we want
+    yield put({ type: "SET_MOVIE", payload: selectedMovie.data })
+}
 
 // Create sagaMiddleware
 const sagaMiddleware = createSagaMiddleware();
@@ -35,6 +43,15 @@ const sagaMiddleware = createSagaMiddleware();
 const movies = (state = [], action) => {
     switch (action.type) {
         case 'SET_MOVIES':
+            return action.payload;
+        default:
+            return state;
+    }
+}
+
+const movie = (state = [], action) => {
+    switch (action.type) {
+        case 'SET_MOVIE':
             return action.payload;
         default:
             return state;
@@ -55,6 +72,7 @@ const genres = (state = [], action) => {
 const storeInstance = createStore(
     combineReducers({
         movies,
+        movie,
         genres,
     }),
     // Add sagaMiddleware to our store
