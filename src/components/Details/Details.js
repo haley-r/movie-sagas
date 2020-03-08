@@ -9,7 +9,6 @@ class Details extends Component {
 
     componentDidMount=()=> {
         //get the movie id from the passed props/params, GET movie data,
-        //store movie object in localstate
         this.getMovie(this.props.match.params.movieId);
     }
 
@@ -33,10 +32,10 @@ class Details extends Component {
                         {
                             this.props.selectedMovie.genres ?
                                 <ul>{this.props.selectedMovie.genres.map((genreString)=>
-                                    <li className="genre">{genreString} </li>
+                                    <li className="genre" key={genreString}>{genreString} </li>
                                 )}</ul>
                                 :
-                                <p>{JSON.stringify(this.props.selectedMovie.genres)}</p>
+                                <p></p>
                         }
                         <p>{this.props.selectedMovie.description}</p>
                     </article>

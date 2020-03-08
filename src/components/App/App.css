@@ -67,6 +67,8 @@ section{
   padding-bottom: 5em;
 }
 
+/* DETAILS VIEW STYLES */
+
 .details article {
   background-color: white;
   color: black;
@@ -107,4 +109,56 @@ section{
   margin: .5em;
   border-radius: .5em;
   font-size: .8em;
+}
+
+/* EDIT VIEW STYLES */
+
+.edit article {
+  background-color: white;
+  color: black;
+  width: 80vw;
+  margin: 1em auto 2em auto;
+  padding-bottom: 1em;
+  border-radius: 50px;
+}
+
+.edit h2{
+  font-size: 1.5em;
+  padding-top: .5em;
+}
+
+.edit p{
+  width: 90%;
+  margin: 1em auto;
+}
+
+.edit button{
+  display: block;
+  margin: 10px auto;
+  padding: .5em;
+  border-radius: 1em;
+}
+
+.edit-form {
+  width: 80%;
+  margin: auto;
+}
+
+.edit label {
+  display: block;
+  text-align: left;
+  margin-top: 1em;
+}
+
+.edit input, .edit textarea {
+  width: 100%;
+  font-family: inherit;
+  font-size: .8em;
+}
+
+#description-input {
+  height: 300px;
+  margin-bottom: 1em;
+  overflow: scroll;
+  word-wrap: normal;
 }
