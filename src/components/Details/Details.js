@@ -26,19 +26,20 @@ class Details extends Component {
         return (
             <div>
                 <section className="details">
-                    <article className="details editmode">
+                    <article className="details">
                         <h2>{this.props.selectedMovie.title}</h2>
                         <img src={this.props.selectedMovie.poster} alt={`movie poster for ${this.props.selectedMovie.title}`}/>
                         {
                             this.props.selectedMovie.genres ?
-                                <ul>Genre: {this.props.selectedMovie.genres.map((genreString)=>
-                                    <li>{genreString} </li>
+                                <ul>{this.props.selectedMovie.genres.map((genreString)=>
+                                    <li className="genre">{genreString} </li>
                                 )}</ul>
                                 :
                                 <p>{JSON.stringify(this.props.selectedMovie.genres)}</p>
                         }
                         <p>{this.props.selectedMovie.description}</p>
                     </article>
+                    <button>Edit Movie Information</button>
                     <button onClick={this.backHome}>BACK TO DATABASE</button>
                 </section>
             </div>
