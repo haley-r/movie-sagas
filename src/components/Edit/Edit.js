@@ -9,13 +9,22 @@ class Edit extends Component {
         this.props.dispatch({ type: "GET_MOVIE", payload: movieId });
     }
 
-    // backHome=()=>{
-    //     this.props.history.push('/');
-    // }
+    backHome=()=>{
+        this.props.history.push('/');
+    }
+
+    backToDetails=()=>{
+        this.props.history.push(`/details/${this.props.match.params.movieId}`);
+    }
 
     componentDidMount=()=> {
         //get the movie id from the passed props/params, GET movie data
         this.getMovie(this.props.match.params.movieId);
+    }
+
+    updateInformation=()=> {
+        //eventually this will dispatch to initiate a put request
+        console.log('in updateInformation');
     }
 
     render() {
@@ -29,10 +38,10 @@ class Edit extends Component {
                             <input id="title-input" type="text" value={this.props.selectedMovie.title} />
                             <label htmlFor="description-input">Description</label>
                             <textarea id="description-input" type="text" value={this.props.selectedMovie.description} />
-                            <button>Confirm Changes</button>
+                            <button onClick={this.backToDetails}>Cancel Changes</button>
+                            <button onClick={this.updateInformation}>Confirm Changes</button>
                         </div>
                     </article>
-                    <button>Back to Details</button>
                     <button onClick={this.backHome}>BACK TO DATABASE</button>
                 </section>
             </div>
