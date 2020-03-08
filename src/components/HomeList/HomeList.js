@@ -8,8 +8,7 @@ class HomeList extends Component {
     }
 
     goToDetails=(id)=>{
-        console.log('clicked on movie poster', this.props);
-        //go to details view
+        //go to details view for movie clicked
         this.props.history.push(`/details/${id}`);
     }
 

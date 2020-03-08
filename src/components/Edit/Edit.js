@@ -1,7 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-class Details extends Component {
+class Edit extends Component {
+
+    state={genreArray:[]}
+
+    getMovie = (movieId) => {
+        this.props.dispatch({ type: "GET_MOVIE", payload: movieId });
+    }
 
     backHome=()=>{
         this.props.history.push('/');
@@ -11,16 +17,9 @@ class Details extends Component {
         //get the movie id from the passed props/params, GET movie data,
         //store movie object in localstate
         this.getMovie(this.props.match.params.movieId);
-    }
-
-    getMovie = (movieId) => {
-        this.props.dispatch({ type: "GET_MOVIE", payload: movieId });
-    }
-
-    goToEdit=()=> {
-        //go to edit view for current movie
-        this.props.history.push(`/edit/${this.props.match.params.movieId}`)
-
+        this.setState({
+            genreArray: this.props.selectedMovie.genres
+        })
     }
 
     render() {
@@ -40,7 +39,7 @@ class Details extends Component {
                         }
                         <p>{this.props.selectedMovie.description}</p>
                     </article>
-                    <button onClick={this.goToEdit}>Edit Movie Information</button>
+                    <button>Edit Movie Information</button>
                     <button onClick={this.backHome}>BACK TO DATABASE</button>
                 </section>
             </div>
@@ -51,4 +50,4 @@ class Details extends Component {
 const putReduxStateOnProps = (reduxState) => ({
     selectedMovie: reduxState.movie
 })
-export default connect(putReduxStateOnProps)(Details);
+export default connect(putReduxStateOnProps)(Edit);

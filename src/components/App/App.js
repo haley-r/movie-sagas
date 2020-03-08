@@ -5,6 +5,7 @@ import {HashRouter as Router, Route} from 'react-router-dom';
 import Header from '../Header/Header';
 import HomeList from '../HomeList/HomeList';
 import Details from '../Details/Details';
+import Edit from '../Edit/Edit';
 // import Footer from '../Footer/Footer';
 
 class App extends Component {
@@ -16,6 +17,7 @@ class App extends Component {
         <Router>
           <Route exact path="/" component={HomeList} />
           <Route path="/details/:movieId" component={Details}/>
+          <Route path="/edit/:movieId" component={Edit} />
           {/* <Footer /> */}
         </Router>
       </div>
