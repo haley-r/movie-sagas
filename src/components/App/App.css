@@ -2,6 +2,7 @@
   text-align: center;
   background-color: rgb(22, 2, 16);
   color: white;
+  min-height: 100vh;
 }
 
 
@@ -58,5 +59,6 @@ button {
   padding: 0;
   width: 180px;
   background-color: #222;;
+  color: white;
   border: none;
 }
