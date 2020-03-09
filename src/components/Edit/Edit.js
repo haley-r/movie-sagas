@@ -3,7 +3,11 @@ import { connect } from 'react-redux';
 
 class Edit extends Component {
 
-    state={genreArray:[]}
+    state={
+        titleInput: '' ,
+        descriptionInput: ''
+    }
+    
 
     getMovie = (movieId) => {
         this.props.dispatch({ type: "GET_MOVIE", payload: movieId });
@@ -20,11 +24,39 @@ class Edit extends Component {
     componentDidMount=()=> {
         //get the movie id from the passed props/params, GET movie data
         this.getMovie(this.props.match.params.movieId);
+        //set the local state values based on that movie info, for filling inputs
+    }
+
+    assignInitialState=()=>{
+        //set the values to be what's already stored in db for movie, if user hasn't entered anything
+        if (this.state.titleInput==='' && this.state.descriptionInput===''){ 
+            this.setState({
+                titleInput: this.props.selectedMovie.title,
+                descriptionInput: this.props.selectedMovie.description
+            })
+        }//end if
+    }
+
+    storeInput=(event, type)=>{
+        //store input data in local state
+        this.setState({
+            ...this.state,
+            [type]: event.target.value
+        })
     }
 
     updateInformation=()=> {
+        console.log(this.props.selectedMovie);
+        let updatedMovieInfo = this.props.selectedMovie;
+        updatedMovieInfo.title=this.state.titleInput;
+        updatedMovieInfo.description=this.state.descriptionInput;
+        console.log(updatedMovieInfo);
         //eventually this will dispatch to initiate a put request
         console.log('in updateInformation');
+        this.props.dispatch({ type: "UPDATE_MOVIE", payload: updatedMovieInfo });
+        //and then go back to details
+        //maybe an alert before doing that would be good too, like a snackbar
+        // this.props.history.push(`/details/${this.props.match.params.movieId}`);
     }
 
     render() {
@@ -35,9 +67,19 @@ class Edit extends Component {
                         <h2>Edit Movie Details</h2>
                         <div className="edit-form">
                             <label htmlFor="title-input">Title</label>
-                            <input id="title-input" type="text" value={this.props.selectedMovie.title} />
+                            <input  onClick={this.assignInitialState}
+                                    onChange={(event)=>this.storeInput(event,'titleInput')}
+                                    id="title-input" 
+                                    type="text" 
+                                    placeholder={this.props.selectedMovie.title} 
+                                    value={this.state.titleInput}/>
                             <label htmlFor="description-input">Description</label>
-                            <textarea id="description-input" type="text" value={this.props.selectedMovie.description} />
+                            <textarea onClick={this.assignInitialState}
+                                    onChange={(event) => this.storeInput(event, 'descriptionInput')}
+                                    id="description-input" 
+                                    type="text" 
+                                    placeholder={this.props.selectedMovie.description} 
+                                    value={this.state.descriptionInput} />
                             <button onClick={this.backToDetails}>Cancel Changes</button>
                             <button onClick={this.updateInformation}>Confirm Changes</button>
                         </div>
