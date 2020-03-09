@@ -18,6 +18,7 @@ import axios from 'axios';
 function* rootSaga() {
     yield takeEvery("GET_MOVIES", getMovies);
     yield takeEvery("GET_MOVIE", getMovie);
+    yield takeEvery("UPDATE_MOVIE", updateMovie);
 }
 
 function* getMovies() {
@@ -34,6 +35,11 @@ function* getMovie(action) {
     //after (not before!) the movies are gotten, dispatch 'em to the reducer!
     //.data accesses just the array, which is all we want
     yield put({ type: "SET_MOVIE", payload: selectedMovie.data })
+}
+
+function* updateMovie(action){
+    console.log('in updateMovie with', action);
+    yield axios.put(`/movies/${action.payload.id}`, action.payload);
 }
 
 // Create sagaMiddleware

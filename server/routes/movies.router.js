@@ -47,5 +47,16 @@ router.get('/:id', (req, res) => {
         })
 })
 
+router.put('/:id', (req, res) => {
+    const generalQuery = `UPDATE "movies" SET "title" = $1, "description" = $2 WHERE "id" = $3`;
+    pool.query(generalQuery, [req.body.title, req.body.description, req.params.id])
+        .then(response => {
+            res.sendStatus(200);
+        })
+        .catch(error => {
+            console.log('problem with movies.router get:', error);
+        })
+})
+
 
 module.exports = router;

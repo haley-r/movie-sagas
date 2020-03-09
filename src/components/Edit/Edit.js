@@ -46,15 +46,17 @@ class Edit extends Component {
     }
 
     updateInformation=()=> {
-        console.log(this.props.selectedMovie);
         let updatedMovieInfo = this.props.selectedMovie;
-        updatedMovieInfo.title=this.state.titleInput;
-        updatedMovieInfo.description=this.state.descriptionInput;
-        console.log(updatedMovieInfo);
-        //eventually this will dispatch to initiate a put request
-        console.log('in updateInformation');
-        this.props.dispatch({ type: "UPDATE_MOVIE", payload: updatedMovieInfo });
-        //and then go back to details
+        if(this.state.titleInput!=='' && this.state.descriptionInput!==''){
+            updatedMovieInfo.title=this.state.titleInput;
+            updatedMovieInfo.description=this.state.descriptionInput;
+            //eventually this will dispatch to initiate a put request
+            console.log('in updateInformation');
+            this.props.dispatch({ type: "UPDATE_MOVIE", payload: updatedMovieInfo });
+            //and then go back to details
+            this.props.history.push(`/details/${this.props.match.params.movieId}`);
+        }
+        else {alert('you must change the title or description in order to save changes');}
         //maybe an alert before doing that would be good too, like a snackbar
         // this.props.history.push(`/details/${this.props.match.params.movieId}`);
     }
