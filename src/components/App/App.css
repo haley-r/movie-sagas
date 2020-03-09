@@ -1,3 +1,7 @@
+body{  
+  background-color: rgb(22, 2, 16);
+}
+
 .App {
   text-align: center;
   background-color: rgb(22, 2, 16);
@@ -49,15 +53,15 @@ button img {
 /* GRID STYLES */
 .grid-container {
   display: grid;
-  grid-template-columns: 300px;
-  grid-template-rows: repeat[500px];
+  grid-template-columns: 50% 50%;
+  grid-template-rows: repeat(500px);
 }
 
 /* STRIP BUTTON STYLES */
 button {
   margin: 0;
   padding: 0;
-  width: 180px;
+  width: 80%;
   background-color: #222;;
   color: white;
   border: none;
@@ -161,4 +165,16 @@ section{
   margin-bottom: 1em;
   overflow: scroll;
   word-wrap: normal;
+}
+
+/* ANIMATION STYLES FROM TYLER MCGINNIS SITE */
+
+.fade-enter {
+  opacity: 0;
+  z-index: 1;
+}
+
+.fade-enter.fade-enter-active {
+  opacity: 1;
+  transition: opacity 250ms ease-in;
 }
