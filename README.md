@@ -4,6 +4,16 @@ This full-stack react application displays movies from a database-posters on the
 
 This weekend challenge was a chance to practice full-stack react, react routers, redux states, sagas and css styling.
 
+![feedback loop interface](public/images/movies-1.png)
+
+![feedback loop interface](public/images/movies-2.png)
+
+![feedback loop interface](public/images/movies-3.png)
+
+## Installation
+
+In terminal window or editor of choice, "npm install", "run server", and "run client". Follow instructions below to set up database.
+
 ## Technologies Used
 
 - React
